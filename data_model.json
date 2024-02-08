@@ -1,0 +1,194 @@
+{
+    "version": "2024-01-31",
+    "metadata": {
+      "description": "Ecommerce app data model"
+    },
+    "tables": {
+      "Customers": {
+        "type": "AWS::DynamoDB::Table",
+        "DeletionPolicy": "Retain",
+        "Attributes": {
+          "id": {
+            "Type": "S",
+            "KeySchemaElement": {
+              "AttributeName": "id",
+              "KeyType": "HASH"
+            }
+          },
+          "email": {
+            "Type": "S",
+            "Unique": true
+          },
+          "name": {
+            "Type": "S"
+          },
+          "phone_number": {
+            "Type": "S"
+          },
+          "shipping_address": {
+            "Type": "M",
+            "Properties": {
+              "street": {
+                "Type": "S"
+              },
+              "city": {
+                "Type": "S"
+              },
+              "state": {
+                "Type": "S"
+              },
+              "country": {
+                "Type": "S"
+              }
+            }
+          },
+          "billing_address": {
+            "Type": "M",
+            "Properties": {
+              "street": {
+                "Type": "S"
+              },
+              "city": {
+                "Type": "S"
+              },
+              "state": {
+                "Type": "S"
+              },
+              "country": {
+                "Type": "S"
+              }
+            }
+          }
+        }
+      },
+      "Products": {
+        "type": "AWS::DynamoDB::Table",
+        "DeletionPolicy": "Retain",
+        "Attributes": {
+          "id": {
+            "Type": "S",
+            "KeySchemaElement": {
+              "AttributeName": "id",
+              "KeyType": "HASH"
+            }
+          },
+          "name": {
+            "Type": "S"
+          },
+          "description": {
+            "Type": "S"
+          },
+          "price": {
+            "Type": "N"
+          },
+          "image": {
+            "Type": "S"
+          },
+          "category": {
+            "Type": "S"
+          },
+          "stock": {
+            "Type": "N"
+          },
+          "brand": {
+            "Type": "S"
+          }
+        }
+      },
+      "Orders": {
+        "type": "AWS::DynamoDB::Table",
+        "DeletionPolicy": "Retain",
+        "Attributes": {
+          "id": {
+            "Type": "S",
+            "KeySchemaElement": {
+              "AttributeName": "id",
+              "KeyType": "HASH"
+            }
+          },
+          "customerId": {
+            "Type": "S",
+            "IndexName": "CustomerIdIndex",
+            "KeyType": "RANGE"
+          },
+          "createdAt": {
+            "Type": "S"
+          },
+          "status": {
+            "Type": "S"
+          },
+          "total": {
+            "Type": "N"
+          },
+          "shipping_address": {
+            "Type": "M",
+            "Properties": {
+              "street": {
+                "Type": "S"
+              },
+              "city": {
+                "Type": "S"
+              },
+              "state": {
+                "Type": "S"
+              },
+              "country": {
+                "Type": "S"
+              }
+            }
+          },
+          "items": {
+            "Type": "L",
+            "Member": {
+              "Type": "M",
+              "Properties": {
+                "productId": {
+                  "Type": "S"
+                },
+                "quantity": {
+                  "Type": "N"
+                }
+              }
+            }
+          }
+        }
+      },
+         "Carts": {
+        "type": "AWS::DynamoDB::Table",
+        "DeletionPolicy": "Retain",
+        "Attributes": {
+          "id": {
+            "Type": "S",
+            "KeySchemaElement": {
+              "AttributeName": "id",
+              "KeyType": "HASH"
+            }
+          },
+          "customerId": {
+            "Type": "S",
+            "IndexName": "CustomerIdIndex",
+            "KeyType": "RANGE"
+          },
+          "createdAt": {
+            "Type": "S"
+          },
+          "items": {
+            "Type": "L",
+            "Member": {
+              "Type": "M",
+              "Properties": {
+                "productId": {
+                  "Type": "S"
+                },
+                "quantity": {
+                  "Type": "N"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+
